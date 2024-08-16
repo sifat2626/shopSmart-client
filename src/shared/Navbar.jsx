@@ -28,6 +28,9 @@ function Navbar() {
           <li>
             <Link to="/products/create">Create Product</Link>
           </li>
+          <li>
+            <Link to="/products">All Products</Link>
+          </li>
         </>
       )}
     </>
@@ -59,7 +62,7 @@ function Navbar() {
             {navList}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">ShopSmart</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navList}</ul>
@@ -74,7 +77,7 @@ function Navbar() {
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src="https://img.ShopSmart.com/images/stock/photo-1534528741775-53994a69daeb.webp"
               />
             </div>
           </div>

@@ -1,18 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 function CreateProduct() {
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
     name: "",
     image: null,
     description: "",
     price: "",
     category: "",
-    rating: "",
+    brand: "",
+    ratings: 0,
     createdAt: new Date().toISOString().slice(0, 16), // Default to current date and time
   });
 
@@ -40,12 +44,27 @@ function CreateProduct() {
       const newProduct = {
         ...product,
         image: imageUrl, // Use the uploaded image URL
+        ratings: parseFloat(product.ratings), // Ensure ratings is a float
       };
 
-      console.log(newProduct);
+      // Save product data
+      await axiosPublic.post("/products", newProduct);
+      toast.success("Product created successfully!");
 
-      // Proceed to save product data, e.g., send to your backend
-      // await axiosPublic.post('/your-api-endpoint', newProduct);
+      // Reset the form
+      setProduct({
+        name: "",
+        image: null,
+        description: "",
+        price: "",
+        category: "",
+        brand: "",
+        ratings: 0,
+        createdAt: new Date().toISOString().slice(0, 16),
+      });
+
+      // Navigate to the all products page
+      navigate("/products");
     } catch (error) {
       console.error("Error uploading image or creating product:", error);
     }
@@ -71,7 +90,6 @@ function CreateProduct() {
             name="name"
             value={product.name}
             onChange={handleChange}
-            placeholder="Enter product name"
             required
           />
         </div>
@@ -107,7 +125,6 @@ function CreateProduct() {
             name="description"
             value={product.description}
             onChange={handleChange}
-            placeholder="Enter product description"
             required
           />
         </div>
@@ -126,7 +143,6 @@ function CreateProduct() {
             name="price"
             value={product.price}
             onChange={handleChange}
-            placeholder="Enter product price"
             required
           />
         </div>
@@ -145,7 +161,6 @@ function CreateProduct() {
             name="category"
             value={product.category}
             onChange={handleChange}
-            placeholder="Enter product category"
             required
           />
         </div>
@@ -153,18 +168,35 @@ function CreateProduct() {
         <div className="mb-4">
           <label
             className="block text-gray-700 font-semibold mb-2"
-            htmlFor="rating"
+            htmlFor="brand"
+          >
+            Brand
+          </label>
+          <input
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            type="text"
+            id="brand"
+            name="brand"
+            value={product.brand}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 font-semibold mb-2"
+            htmlFor="ratings"
           >
             Rating
           </label>
           <input
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
             type="number"
-            id="rating"
-            name="rating"
-            value={product.rating}
+            id="ratings"
+            name="ratings"
+            value={product.ratings}
             onChange={handleChange}
-            placeholder="Enter product rating"
             required
             min="0"
             max="5"
