@@ -14,13 +14,19 @@ function Navbar() {
       <li>
         <Link to="/">Home</Link>
       </li>
-      {!user && (
+      {!user ? (
         <>
           <li>
             <Link to="/login">Login</Link>
           </li>
           <li>
             <Link to="/register">Register</Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to="/products/create">Create Product</Link>
           </li>
         </>
       )}
