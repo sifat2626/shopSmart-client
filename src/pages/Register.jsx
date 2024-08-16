@@ -1,21 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../assets/images/register.jpg";
 import logo from "../assets/images/logo.png";
 import useAuth from "../hooks/useAuth";
 
 function Register() {
-  const { createUser } = useAuth();
-  const handleGoogleSignIn = () => {};
+  const { createUser, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state || "/";
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle();
+    navigate(from, { replace: true });
+  };
 
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
-    const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
 
     createUser(email, password);
+    navigate(from, { replace: true });
   };
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
@@ -69,38 +75,6 @@ function Register() {
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
           </div>
           <form onSubmit={handleSignUp}>
-            <div className="mt-4">
-              <label
-                className="block mb-2 text-sm font-medium text-gray-600 "
-                htmlFor="name"
-              >
-                Username
-              </label>
-              <input
-                id="name"
-                autoComplete="name"
-                name="name"
-                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
-                type="text"
-                required
-              />
-            </div>
-            <div className="mt-4">
-              <label
-                className="block mb-2 text-sm font-medium text-gray-600 "
-                htmlFor="photo"
-              >
-                Photo URL
-              </label>
-              <input
-                id="photo"
-                autoComplete="photo"
-                name="photo"
-                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
-                type="text"
-                required
-              />
-            </div>
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 "
