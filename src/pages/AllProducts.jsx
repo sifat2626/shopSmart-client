@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import ProductCard from "../components/ProductCard";
 import { IoReloadOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
 
 function AllProducts() {
   const [products, setProducts] = useState([]);
@@ -14,6 +14,9 @@ function AllProducts() {
   const [maxPrice, setMaxPrice] = useState("");
   const [sortBy, setSortBy] = useState("createdAt");
   const [order, setOrder] = useState("desc");
+
+  const categories = [...new Set(products.map((p) => p.category))];
+  const brands = [...new Set(products.map((p) => p.brand))];
 
   useEffect(() => {
     const axiosPublic = useAxiosPublic();
@@ -44,17 +47,17 @@ function AllProducts() {
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    setPage(1); // Reset to first page on search
+    setPage(1);
   };
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
-    setPage(1); // Reset to first page on filter change
+    setPage(1);
   };
 
   const handleBrandChange = (e) => {
     setBrand(e.target.value);
-    setPage(1); // Reset to first page on filter change
+    setPage(1);
   };
 
   const handlePriceChange = (e) => {
@@ -63,7 +66,7 @@ function AllProducts() {
     } else {
       setMaxPrice(e.target.value);
     }
-    setPage(1); // Reset to first page on filter change
+    setPage(1);
   };
 
   const handleSortChange = (e) => {
@@ -80,7 +83,7 @@ function AllProducts() {
     setMaxPrice("");
     setSortBy("createdAt");
     setOrder("desc");
-    setPage(1); // Reset to first page
+    setPage(1);
   };
 
   return (
@@ -102,9 +105,11 @@ function AllProducts() {
           className="border border-gray-300 rounded-md p-2 w-full md:w-1/6"
         >
           <option value="">All Categories</option>
-          <option value="electronics">Electronics</option>
-          <option value="fashion">Fashion</option>
-          {/* Add more categories as needed */}
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
         </select>
 
         <select
@@ -113,9 +118,11 @@ function AllProducts() {
           className="border border-gray-300 rounded-md p-2 w-full md:w-1/6"
         >
           <option value="">All Brands</option>
-          <option value="apple">Apple</option>
-          <option value="samsung">Samsung</option>
-          {/* Add more brands as needed */}
+          {brands.map((brand) => (
+            <option key={brand} value={brand}>
+              {brand}
+            </option>
+          ))}
         </select>
 
         <div className="flex items-center gap-2">
@@ -157,24 +164,7 @@ function AllProducts() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map((product) => (
-          <Link to={`/products/${product._id}`} key={product._id}>
-            <div className="flex flex-col justify-between h-full border border-gray-300 rounded-lg p-4 shadow-md">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-48 object-cover mb-4 rounded"
-              />
-              <div className="flex flex-col justify-between flex-grow">
-                <div>
-                  <h2 className="text-xl font-bold">{product.name}</h2>
-                  <p className="text-gray-700">{product.description}</p>
-                </div>
-                <p className="text-gray-900 font-semibold mt-4">
-                  Price: ${product.price}
-                </p>
-              </div>
-            </div>
-          </Link>
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
 
