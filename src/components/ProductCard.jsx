@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function ProductCard({ product }) {
+  console.log(product);
   return (
     <div className="flex flex-col justify-between h-full border border-gray-300 rounded-lg p-4 shadow-md">
       <img
