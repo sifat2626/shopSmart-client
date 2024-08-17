@@ -12,24 +12,34 @@ function Navbar() {
   const navList = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/" className="text-lg font-medium">
+          Home
+        </Link>
       </li>
       {!user ? (
         <>
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/login" className="text-lg font-medium">
+              Login
+            </Link>
           </li>
           <li>
-            <Link to="/register">Register</Link>
+            <Link to="/register" className="text-lg font-medium">
+              Register
+            </Link>
           </li>
         </>
       ) : (
         <>
           <li>
-            <Link to="/products/create">Create Product</Link>
+            <Link to="/products/create" className="text-lg font-medium">
+              Create Product
+            </Link>
           </li>
           <li>
-            <Link to="/products">All Products</Link>
+            <Link to="/products" className="text-lg font-medium">
+              All Products
+            </Link>
           </li>
         </>
       )}
@@ -62,7 +72,7 @@ function Navbar() {
             {navList}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">ShopSmart</a>
+        <a className="btn btn-ghost text-3xl font-bold">ShopSmart</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navList}</ul>
@@ -77,7 +87,7 @@ function Navbar() {
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.ShopSmart.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src="https://img.daisyUi.com/images/stock/photo-1534528741775-53994a69daeb.webp"
               />
             </div>
           </div>
