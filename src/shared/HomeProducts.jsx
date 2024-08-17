@@ -19,6 +19,12 @@ function HomeProducts() {
           </Link>
         ))}
       </div>
+      <Link
+        to={"/products"}
+        className="text-2xl underline font-semibold flex justify-center my-4"
+      >
+        View All
+      </Link>
     </div>
   );
 }

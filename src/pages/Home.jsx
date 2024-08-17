@@ -2,8 +2,8 @@ import HomeProducts from "../shared/HomeProducts";
 
 function Home() {
   return (
-    <div>
-      <h2>Home</h2>
+    <div className="">
+      <h2 className=" text-center text-4xl font-semibold my-4">Products</h2>
       <HomeProducts />
     </div>
   );
