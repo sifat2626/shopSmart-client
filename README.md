@@ -9,29 +9,12 @@ Welcome to the frontend of **ShopSmart**, a full-stack e-commerce application bu
 - **Responsive Design:** Fully responsive design, optimized for mobile, tablet, and desktop devices.
 - **Product Details:** View detailed information about each product, including descriptions, pricing, and more.
 
+## Website
+
+Check out the live website: [ShopSmart](https://shop-smart-1.netlify.app/)
+
 ## Start the development server:
 
 ```bash
 npm run dev
 ```
-
-The application will be available at `http://localhost:8000`.
-
-## Technologies Used
-
-- **React.js:** A JavaScript library for building user interfaces.
-- **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
-- **Axios:** For making HTTP requests to the backend API.
-- **React Router:** For client-side routing.
-
-## License
-
-This project is licensed under the MIT License.
-
-## Contact
-
-For any inquiries or support, please contact:
-
-- **Name:** Md. Ashraful Alam Sifat
-- **Email:** ashrafulsifat26@gmail.com
-- **LinkedIn:** [LinkedIn Profile](https://www.linkedin.com/in/ashraful-sifat-ash26/)
